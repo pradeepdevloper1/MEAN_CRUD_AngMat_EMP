@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+  }
+th.mat-sort-header-sorted {
+    color: black;
+  }
+.hide{
+  display: none;
+}  
+
+.search-div{
+  margin: 10px;
+}
+.search-form-field {
+  width: 200px;
+  margin-left: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}

@@ -1,0 +1,93 @@
+<div class="search-div">
+  <button mat-raised-button (click)="onCreate()">
+    <mat-icon>add</mat-icon>Create
+  </button>
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput type="text" [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+    <button mat-button  matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()" >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<div>
+<table mat-table [dataSource]="MyDataSource" matSort  class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- empid Column -->
+    <ng-container matColumnDef="empid">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header > EmpID. </th>
+      <td mat-cell *matCellDef="let element"> {{element.empid}} </td>
+    </ng-container>
+  
+    <!-- fullName Column -->
+    <ng-container matColumnDef="fullName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
+    </ng-container>
+
+     <!-- Email Column -->
+     <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef   mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+      </ng-container>
+
+     <!--  mobile Column-->
+     <ng-container matColumnDef="mobile">
+        <th mat-header-cell *matHeaderCellDef> Mobile </th>
+        <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+      </ng-container>
+  
+    <!-- City Column -->
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header> City </th>
+      <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+    </ng-container>
+
+     <!-- Department Column -->
+     <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef > Gender </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+      </ng-container>
+
+  <!-- Department Column -->
+    <ng-container matColumnDef="department">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header> Department </th>
+        <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+      </ng-container>
+  
+     <!-- Hire Date Column -->
+     <ng-container matColumnDef="hireDate">
+        <th mat-header-cell *matHeaderCellDef  mat-sort-header > HireDate </th>
+        <td mat-cell *matCellDef="let element"> {{element.hireDate}} </td>
+      </ng-container>
+  
+   <!-- isPermanent Column -->
+     <ng-container matColumnDef="isPermanent">
+        <th mat-header-cell *matHeaderCellDef> IsPermanent </th>
+        <td mat-cell *matCellDef="let element"> {{element.isPermanent}} </td>
+      </ng-container>
+        <!-- isPermanent Column -->
+     <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="onEdit(row)"><mat-icon>launch</mat-icon></button> 
+        <button mat-icon-button color="warn" (click)="onDelete(row)"><mat-icon>delete_outline</mat-icon></button></td>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <th mat-footer-cell *matFooterCellDef colspan="10">Loading Data... </th>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <th mat-footer-cell *matFooterCellDef colspan="10">No Data... </th>
+    </ng-container>
+      
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':MyDataSource!=null}"></tr>
+    <tr mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(MyDataSource!=null && MyDataSource.data.length==0)}"></tr>
+
+  </table>
+  <!-- To paginate between pages with search -->
+<mat-paginator #paginator [length]="employeeList && employeeList.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+</mat-paginator>
+</div>

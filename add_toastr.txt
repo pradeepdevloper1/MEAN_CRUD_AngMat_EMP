@@ -1,0 +1,41 @@
+npm install ngx-toastr --save
+npm install @angular/animations --save
+
+
+angular.json
+"styles": [
+  "styles.scss",
+  "node_modules/ngx-toastr/toastr.css" // try adding '../' if you're using angular cli before 6
+]
+
+
+
+
+app.module.ts
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+@NgModule({
+  imports: [
+    CommonModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
+  ],
+  bootstrap: [App],
+  declarations: [App],
+})
+
+
+
+employee.component.ts
+import { ToastrService } from 'ngx-toastr';
+  constructor(private toastr:ToastrService) { }
+
+insertRecord(form) {
+  this.service.postEmployee(form.value).subscribe(res => {
+    this.toastr.success('Inserted successfully', 'EMP. Register');
+    this.service.initializeFormGroup();
+    this.service.refreshList();
+  });
+}
+

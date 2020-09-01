@@ -1,0 +1,8 @@
+echo "# MEAN_CRUD_AngMat_EMP" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add origin1024 https://github.com/pradeepdevloper1/MEAN_CRUD_AngMat_EMP.git
+git push -u origin1024 master
+                
